@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دراسة مجموعة الراي الإعلامية</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Cairo',sans-serif; background:#0a0e1a; color:#e0e6f0; min-height:100vh; }
+
+  .nav {
+    position:sticky; top:0;
+    background:rgba(10,14,26,0.96);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid #1e3a5f;
+    padding:10px 20px;
+    display:flex; gap:6px; flex-wrap:wrap; z-index:100;
+  }
+  .nav-btn {
+    background:transparent; border:1px solid #1e3a5f; color:#8ab4d4;
+    padding:5px 12px; border-radius:20px; cursor:pointer;
+    font-family:'Cairo',sans-serif; font-size:12px; transition:all 0.2s;
+  }
+  .nav-btn:hover,.nav-btn.active { background:#1a6baa; border-color:#1a6baa; color:#fff; }
+
+  .section { display:none; padding:28px 22px; max-width:1100px; margin:0 auto; }
+  .section.active { display:block; }
+
+  /* ENTITY DIVIDER */
+  .entity-divider {
+    display:flex; align-items:center; gap:14px; margin:28px 0 18px;
+  }
+  .entity-badge {
+    padding:6px 18px; border-radius:24px; font-size:13px; font-weight:900;
+    white-space:nowrap;
+  }
+  .badge-alrai { background:rgba(26,107,170,0.15); border:2px solid #1a6baa; color:#4fc3f7; }
+  .badge-rod { background:rgba(0,200,120,0.12); border:2px solid #00c878; color:#00e5a0; }
+  .entity-line { flex:1; height:1px; background:linear-gradient(90deg,#1e3a5f,transparent); }
+
+  /* HERO */
+  .hero {
+    background:linear-gradient(135deg,#0d1b35 0%,#0a2444 50%,#061830 100%);
+    border:1px solid #1e3a5f; border-radius:16px;
+    padding:36px; margin-bottom:24px; position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; top:-50%; left:-20%;
+    width:60%; height:200%;
+    background:radial-gradient(ellipse,rgba(26,107,170,0.15) 0%,transparent 70%);
+  }
+  .hero h1 { font-size:26px; font-weight:900; color:#fff; margin-bottom:6px; }
+  .hero .subtitle { color:#5a9fd4; font-size:14px; margin-bottom:18px; }
+  .hero-stats {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; margin-top:20px;
+  }
+  .hero-stat { background:rgba(26,107,170,0.12); border:1px solid #1e4a7a; border-radius:10px; padding:14px; text-align:center; }
+  .hero-stat .val { font-size:20px; font-weight:900; color:#4fc3f7; }
+  .hero-stat .lbl { font-size:11px; color:#8ab4d4; margin-top:3px; }
+
+  /* GRIDS */
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:20px; }
+  .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:20px; }
+  @media(max-width:680px) { .grid-2,.grid-3 { grid-template-columns:1fr; } }
+
+  /* CARD */
+  .card { background:#0d1b35; border:1px solid #1e3a5f; border-radius:14px; padding:20px; }
+  .card-title {
+    font-size:13px; font-weight:700; color:#4fc3f7;
+    margin-bottom:14px; display:flex; align-items:center; gap:8px;
+  }
+  .card-title .icon {
+    width:26px; height:26px; border-radius:7px;
+    display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0;
+  }
+
+  /* PLATFORM CARDS */
+  .pcards-group {
+    background:rgba(26,107,170,0.04);
+    border:1px solid #1e3a5f;
+    border-radius:16px;
+    padding:18px;
+    margin-bottom:20px;
+  }
+  .pcards-group.rod-group {
+    background:rgba(0,200,120,0.04);
+    border-color:rgba(0,200,120,0.2);
+  }
+  .pcards-inner { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+
+  .platform-card {
+    background:#0d1b35; border-radius:12px; padding:18px;
+    border:1px solid #1e3a5f; position:relative; overflow:hidden;
+  }
+  .platform-card::before {
+    content:''; position:absolute; top:0; left:0; right:0;
+    height:3px; border-radius:12px 12px 0 0;
+  }
+  .platform-card.instagram::before { background:linear-gradient(90deg,#f09433,#e6683c,#dc2743,#bc1888); }
+  .platform-card.twitter::before  { background:#1da1f2; }
+  .platform-card.youtube::before  { background:#ff0000; }
+  .platform-card.tiktok::before   { background:linear-gradient(90deg,#69c9d0,#ee1d52); }
+  .platform-card.threads::before  { background:#888; }
+  .platform-card.app-alrai::before { background:linear-gradient(90deg,#1a6baa,#4fc3f7); }
+  .platform-card.app-rod::before  { background:linear-gradient(90deg,#00c878,#00e5a0); }
+
+  .platform-name { font-size:15px; font-weight:800; color:#fff; margin-bottom:3px; }
+  .platform-handle { font-size:11px; color:#5a9fd4; margin-bottom:12px; }
+  .platform-followers { font-size:24px; font-weight:900; color:#4fc3f7; margin-bottom:2px; }
+  .platform-followers.rod-color { color:#00e5a0; }
+  .platform-followers-label { font-size:11px; color:#8ab4d4; margin-bottom:12px; }
+
+  /* BARS */
+  .score-bar { margin-bottom:8px; }
+  .score-label { display:flex; justify-content:space-between; font-size:11px; color:#8ab4d4; margin-bottom:3px; }
+  .bar-track { background:#1e3a5f; border-radius:4px; height:5px; overflow:hidden; }
+  .bar-fill { height:100%; border-radius:4px; }
+  .bar-blue   { background:linear-gradient(90deg,#1a6baa,#4fc3f7); }
+  .bar-green  { background:linear-gradient(90deg,#0d7a55,#00e5a0); }
+  .bar-orange { background:linear-gradient(90deg,#b84a00,#ff9800); }
+  .bar-red    { background:linear-gradient(90deg,#8b0000,#f44336); }
+
+  /* APP CARD */
+  .app-card {
+    background:#0a1628; border:1px solid #1e3a5f; border-radius:12px;
+    padding:16px; display:flex; gap:14px; align-items:flex-start;
+  }
+  .app-icon {
+    width:52px; height:52px; border-radius:12px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; font-size:22px;
+    border:1px solid #1e3a5f;
+  }
+  .app-icon.alrai-icon { background:linear-gradient(135deg,#0d2a4a,#1a6baa); }
+  .app-icon.rod-icon   { background:linear-gradient(135deg,#0a2a1a,#00c878); }
+  .app-info h4 { color:#fff; font-size:14px; font-weight:800; margin-bottom:3px; }
+  .app-info .app-sub { font-size:11px; color:#5a9fd4; margin-bottom:8px; }
+  .app-meta { display:flex; flex-wrap:wrap; gap:6px; }
+  .meta-chip {
+    font-size:10px; padding:3px 8px; border-radius:10px;
+    background:rgba(26,107,170,0.12); border:1px solid #1e4a7a; color:#8ab4d4;
+  }
+  .meta-chip.green { background:rgba(0,200,120,0.1); border-color:rgba(0,200,120,0.3); color:#00e5a0; }
+
+  /* SEC TITLE */
+  .sec-title {
+    font-size:18px; font-weight:900; color:#fff;
+    margin-bottom:18px; padding-bottom:10px; border-bottom:2px solid #1e3a5f;
+    display:flex; align-items:center; gap:10px;
+  }
+  .sec-title .dot { width:5px; height:22px; background:#1a6baa; border-radius:3px; }
+
+  /* TAGS */
+  .tag { display:inline-block; padding:2px 9px; border-radius:20px; font-size:10px; font-weight:700; margin:2px; }
+  .tag-green  { background:rgba(0,229,160,0.1); color:#00e5a0; border:1px solid rgba(0,229,160,0.3); }
+  .tag-yellow { background:rgba(255,193,7,0.1); color:#ffc107; border:1px solid rgba(255,193,7,0.3); }
+  .tag-red    { background:rgba(244,67,54,0.1); color:#f44336; border:1px solid rgba(244,67,54,0.3); }
+  .tag-blue   { background:rgba(79,195,247,0.1); color:#4fc3f7; border:1px solid rgba(79,195,247,0.3); }
+
+  /* COMPARE TABLE */
+  .compare-table { width:100%; border-collapse:collapse; font-size:12px; }
+  .compare-table th {
+    background:#0d1b35; color:#4fc3f7;
+    padding:10px 14px; text-align:right;
+    border-bottom:2px solid #1e3a5f; font-weight:700;
+  }
+  .compare-table td { padding:9px 14px; border-bottom:1px solid #1e3a5f; vertical-align:middle; }
+  .compare-table tr:hover td { background:rgba(26,107,170,0.05); }
+  .compare-table .hl td { background:rgba(26,107,170,0.09); }
+  .compare-table .hl td:first-child { border-right:3px solid #1a6baa; }
+
+  /* SWOT */
+  .swot-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px; }
+  .swot-card { border-radius:12px; padding:18px; }
+  .swot-s { background:rgba(0,229,160,0.05); border:1px solid rgba(0,229,160,0.2); }
+  .swot-w { background:rgba(244,67,54,0.05); border:1px solid rgba(244,67,54,0.2); }
+  .swot-o { background:rgba(79,195,247,0.05); border:1px solid rgba(79,195,247,0.2); }
+  .swot-t { background:rgba(255,193,7,0.05); border:1px solid rgba(255,193,7,0.2); }
+  .swot-title { font-size:13px; font-weight:800; margin-bottom:10px; }
+  .swot-s .swot-title { color:#00e5a0; } .swot-w .swot-title { color:#f44336; }
+  .swot-o .swot-title { color:#4fc3f7; } .swot-t .swot-title { color:#ffc107; }
+  .swot-list { list-style:none; }
+  .swot-list li { font-size:11px; color:#c0cce0; padding:4px 13px 4px 0; position:relative; line-height:1.5; }
+  .swot-list li::before { content:'◆'; position:absolute; right:0; font-size:7px; top:6px; }
+  .swot-s .swot-list li::before { color:#00e5a0; } .swot-w .swot-list li::before { color:#f44336; }
+  .swot-o .swot-list li::before { color:#4fc3f7; } .swot-t .swot-list li::before { color:#ffc107; }
+
+  /* IDEAS */
+  .idea-card {
+    background:#0d1b35; border:1px solid #1e3a5f; border-radius:12px;
+    padding:16px; display:flex; gap:14px; margin-bottom:12px; transition:all 0.2s;
+  }
+  .idea-card:hover { border-color:#1a6baa; transform:translateX(-3px); }
+  .idea-num {
+    width:36px; height:36px; border-radius:9px;
+    background:rgba(26,107,170,0.2); border:1px solid #1a6baa;
+    display:flex; align-items:center; justify-content:center;
+    color:#4fc3f7; font-weight:900; font-size:15px; flex-shrink:0;
+  }
+  .idea-content h4 { color:#fff; font-size:13px; font-weight:700; margin-bottom:5px; }
+  .idea-content p { color:#8ab4d4; font-size:11px; line-height:1.7; }
+  .idea-impact { margin-top:7px; display:flex; gap:5px; flex-wrap:wrap; }
+
+  .priority-badge {
+    display:inline-flex; align-items:center; gap:4px;
+    padding:3px 9px; border-radius:20px; font-size:10px; font-weight:700;
+  }
+  .p-high { background:rgba(244,67,54,0.13); color:#f44336; border:1px solid rgba(244,67,54,0.3); }
+  .p-med  { background:rgba(255,193,7,0.13); color:#ffc107; border:1px solid rgba(255,193,7,0.3); }
+  .p-low  { background:rgba(0,229,160,0.13); color:#00e5a0; border:1px solid rgba(0,229,160,0.3); }
+
+  .note-box {
+    background:rgba(26,107,170,0.07); border:1px solid #1e4a7a; border-radius:10px;
+    padding:12px 16px; font-size:12px; color:#8ab4d4; margin-bottom:18px; line-height:1.8;
+  }
+  .traffic-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+  .traffic-label { width:80px; font-size:11px; color:#8ab4d4; text-align:right; flex-shrink:0; }
+  .traffic-bar-wrap { flex:1; background:#1e3a5f; border-radius:4px; height:18px; overflow:hidden; }
+  .traffic-bar-inner {
+    height:100%; border-radius:4px; display:flex; align-items:center;
+    padding:0 7px; font-size:10px; color:#fff; font-weight:700;
+  }
+  .traffic-val { width:44px; font-size:11px; color:#4fc3f7; font-weight:700; flex-shrink:0; }
+
+  ::-webkit-scrollbar { width:5px; }
+  ::-webkit-scrollbar-track { background:#0a0e1a; }
+  ::-webkit-scrollbar-thumb { background:#1e3a5f; border-radius:3px; }
+
+  .rod-accent { color:#00e5a0 !important; }
+  .alrai-accent { color:#4fc3f7 !important; }
+  .review-chip {
+    display:inline-block; background:rgba(255,193,7,0.1); border:1px solid rgba(255,193,7,0.25);
+    color:#ffc107; border-radius:8px; padding:2px 8px; font-size:10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <button class="nav-btn active" onclick="show('overview')">📊 نظرة عامة</button>
+  <button class="nav-btn" onclick="show('platforms')">📱 المنصات</button>
+  <button class="nav-btn" onclick="show('apps')">📲 التطبيقات</button>
+  <button class="nav-btn" onclick="show('website')">🌐 الموقع</button>
+  <button class="nav-btn" onclick="show('content')">✍️ المحتوى والتسويق</button>
+  <button class="nav-btn" onclick="show('compare')">⚖️ المقارنة</button>
+  <button class="nav-btn" onclick="show('swot')">🔍 SWOT</button>
+  <button class="nav-btn" onclick="show('ideas')">💡 أفكار جديدة</button>
+  <button class="nav-btn" onclick="show('roadmap')">🎯 خارطة الطريق</button>
+</div>
+
+<!-- ===== OVERVIEW ===== -->
+<div class="section active" id="sec-overview">
+  <div class="hero">
+    <div class="subtitle">دراسة رقمية وتسويقية شاملة | مايو 2026</div>
+    <h1>مجموعة الراي الإعلامية — الكويت</h1>
+    <p style="color:#8ab4d4;font-size:12px;margin-top:6px">تأسست 2002 | مدرجة بورصة الكويت 2010 | جريدة + تلفزيون + ROD + مراكز بحثية</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="val">1M+</div><div class="lbl">متابع X (الراي)</div></div>
+      <div class="hero-stat"><div class="val">459K</div><div class="lbl">إنستغرام (الراي)</div></div>
+      <div class="hero-stat"><div class="val">71.5K</div><div class="lbl">Threads (الراي)</div></div>
+      <div class="hero-stat"><div class="val">70K</div><div class="lbl">إنستغرام ROD</div></div>
+      <div class="hero-stat"><div class="val">468K</div><div class="lbl">زيارة موقع/شهر</div></div>
+      <div class="hero-stat"><div class="val">90K</div><div class="lbl">نسخة مطبوعة يومياً</div></div>
+    </div>
+  </div>
+
+  <!-- كيانان منفصلان -->
+  <div class="entity-divider">
+    <div class="entity-badge badge-alrai">🗞️ الراي — الجريدة والتلفزيون</div>
+    <div class="entity-line"></div>
+  </div>
+  <p style="font-size:12px;color:#8ab4d4;margin-bottom:16px;line-height:1.8">
+    ذراع الأخبار الرئيسي للمجموعة: إنستغرام @alraimediagroup، تويتر/X @AlraiMediaGroup، يوتيوب @AlraiTube، Threads @alraimediagroup — إضافة لتطبيق الراي الإخباري.
+  </p>
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-title"><div class="icon" style="background:rgba(79,195,247,0.1)">📈</div>تقييم أداء منصات الراي</div>
+    <div class="score-bar"><div class="score-label"><span>X (تويتر) — الرقم 1 كويتياً</span><span>95/100</span></div><div class="bar-track"><div class="bar-fill bar-blue" style="width:95%"></div></div></div>
+    <div class="score-bar"><div class="score-label"><span>Threads — متقدم على المنافسين</span><span>65/100</span></div><div class="bar-track"><div class="bar-fill bar-orange" style="width:65%"></div></div></div>
+    <div class="score-bar"><div class="score-label"><span>إنستغرام — أقل من القبس</span><span>60/100</span></div><div class="bar-track"><div class="bar-fill bar-orange" style="width:60%"></div></div></div>
+    <div class="score-bar"><div class="score-label"><span>يوتيوب — فرصة غير مستغلة</span><span>50/100</span></div><div class="bar-track"><div class="bar-fill bar-red" style="width:50%"></div></div></div>
+    <div class="score-bar"><div class="score-label"><span>تطبيق الراي — تقييم 4.1 ⭐ | 17 تقييم فقط</span><span>55/100</span></div><div class="bar-track"><div class="bar-fill bar-red" style="width:55%"></div></div></div>
+  </div>
+
+  <div class="entity-divider">
+    <div class="entity-badge badge-rod">📺 ROD — منصة الترفيه</div>
+    <div class="entity-line" style="background:linear-gradient(90deg,rgba(0,200,120,0.4),transparent)"></div>
+  </div>
+  <p style="font-size:12px;color:#8ab4d4;margin-bottom:16px;line-height:1.8">
+    ذراع الترفيه والستريمنج: إنستغرام @rod.kwt، تيك توك @rod.kwt — وتطبيق ROD (Rai on Demand).
+  </p>
+  <div class="card" style="border-color:rgba(0,200,120,0.2)">
+    <div class="card-title"><div class="icon" style="background:rgba(0,200,120,0.1)">📊</div><span class="rod-accent">تقييم أداء منصات ROD</span></div>
+    <div class="score-bar"><div class="score-label"><span>الفكرة والموقع التنافسي كمنصة ستريمنج</span><span>85/100</span></div><div class="bar-track"><div class="bar-fill bar-green" style="width:85%"></div></div></div>
+    <div class="score-bar"><div class="score-label"><span>تطبيق ROD — تقييم 3.9 ⭐ | 11 تقييم فقط</span><span>50/100</span></div><div class="bar-track"><div class="bar-fill bar-orange" style="width:50%"></div></div></div>
+    <div class="score-bar"><div class="score-label"><span>إنستغرام @rod.kwt</span><span>45/100</span></div><div class="bar-track"><div class="bar-fill bar-red" style="width:45%"></div></div></div>
+    <div class="score-bar"><div class="score-label"><span>TikTok @rod.kwt — ضعيف جداً</span><span>30/100</span></div><div class="bar-track"><div class="bar-fill bar-red" style="width:30%"></div></div></div>
+  </div>
+</div>
+
+<!-- ===== PLATFORMS ===== -->
+<div class="section" id="sec-platforms">
+
+  <!-- ALRAI -->
+  <div class="entity-divider">
+    <div class="entity-badge badge-alrai">🗞️ منصات الراي — الجريدة والتلفزيون</div>
+    <div class="entity-line"></div>
+  </div>
+
+  <div class="pcards-group">
+    <div class="pcards-inner">
+
+      <div class="platform-card twitter">
+        <div class="platform-name">X (تويتر)</div>
+        <div class="platform-handle">@AlraiMediaGroup · منذ 2010</div>
+        <div class="platform-followers">1,000,000+</div>
+        <div class="platform-followers-label">متابع — الأكبر إخبارياً في الكويت</div>
+        <div class="score-bar"><div class="score-label"><span>الحجم</span><span>★★★★★</span></div><div class="bar-track"><div class="bar-fill bar-blue" style="width:95%"></div></div></div>
+        <div class="score-bar"><div class="score-label"><span>النشاط</span><span>★★★★★</span></div><div class="bar-track"><div class="bar-fill bar-blue" style="width:90%"></div></div></div>
+        <div class="score-bar"><div class="score-label"><span>التفاعل</span><span>★★★☆☆</span></div><div class="bar-track"><div class="bar-fill bar-orange" style="width:58%"></div></div></div>
+        <p style="font-size:11px;color:#8ab4d4;margin-top:10px;line-height:1.6">المنصة الأقوى والأهم. نشر عاجل متواصل 24/7. يتصدر المشهد الإخباري الكويتي.</p>
+        <div style="margin-top:8px"><span class="tag tag-green">رقم 1 كويتياً</span></div>
+      </div>
+
+      <div class="platform-card instagram">
+        <div class="platform-name">إنستغرام</div>
+        <div class="platform-handle">@alraimediagroup</div>
+        <div class="platform-followers">459,000</div>
+        <div class="platform-followers-label">متابع | 78K+ منشور</div>
+        <div class="score-bar"><div class="score-label"><span>الحجم</span><span>★★★☆☆</span></div><div class="bar-track"><div class="bar-fill bar-orange" style="width:62%"></div></div></div>
+        <div class="score-bar"><div class="score-label"><span>كمية المحتوى</span><span>★★★★★</span></div><div class="bar-track"><div class="bar-fill bar-blue" style="width:92%"></div></div></div>
+        <div class="score-bar"><div class="score-label"><span>Reels / فيديو</span><span>★★☆☆☆</span></div><div class="bar-track"><div class="bar-fill bar-red" style="width:38%"></div></div></div>
+        <p style="font-size:11px;color:#8ab4d4;margin-top:10px;line-height:1.6">كمية هائلة لكنها كروت إخبارية فقط. القبس يتجاوزه بأكثر من الضعف.</p>
+        <div style="margin-top:8px"><span class="tag tag-yellow">يحتاج تطوير</span><span class="tag tag-red">Reels ضعيفة</span></div>
+      </div>
+
+      <div class="platform-card youtube">
+        <div class="platform-name">يوتيوب</div>
+        <div class="platform-handle">@AlraiTube</div>
+        <div class="platform-followers">قناة أخبار + تلفزيون</div>
+        <div class="platform-followers-label">بث تلفزيوني + أخبار</div>
+        <div class="score-bar"><div class="score-label"><span>تنوع المحتوى</span><span>★★★☆☆</span></div><div class="bar-track"><div class="bar-fill bar-orange" style="width:58%"></div></div></div>
+        <div class="score-bar"><div class="score-label"><span>YouTube Shorts</span><span>★★☆☆☆</span></div><div class="bar-track"><div class="bar-fill bar-red" style="width:32%"></div></div></div>
+        <p style="font-size:11px;color:#8ab4d4;margin-top:10px;line-height:1.6">يعتمد على مقاطع البرامج التلفزيونية. ضعف في Shorts والـ SEO. فرصة ضخمة.</p>
+        <div style="margin-top:8px"><span class="tag tag-yellow">فرصة كبيرة</span></div>
+      </div>
+
+      <div class="platform-card threads">
+        <div class="platform-name">Threads</div>
+        <div class="platform-handle">@alraimediagroup</div>
+        <div class="platform-followers">71,500</div>
+        <div class="platform-followers-label">متابع — الأقوى محلياً</div>
+        <div class="score-bar"><div class="score-label"><span>الحجم النسبي</span><span>★★★★☆</span></div><div class="bar-track"><div class="bar-fill bar-blue" style="width:72%"></div></div></div>
+        <div class="score-bar"><div class="score-label"><span>التفعيل والجودة</span><span>★★☆☆☆</span></div><div class="bar-track"><div class="bar-fill bar-red" style="width:38%"></div></div></div>
+        <p style="font-size:11px;color:#8ab4d4;margin-top:10px;line-height:1.6">الأقوى بين الصحف الكويتية على Threads. فرصة للمحتوى التحليلي.</p>
+        <div style="margin-top:8px"><span class="tag tag-green">متقدم محلياً</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROD -->
+  <div class="entity-divider">
+    <div class="entity-badge badge-rod">📺 منصات ROD — الترفيه والستريمنج</div>
+    <div class="entity-line" style="background:linear-gradient(90deg,rgba(0,200,120,0.4),transparent)"></div>
+  </div>
+
+  <div class="pcards-group rod-group">
+    <div class="pcards-inner">
+
+      <div class="platform-card instagram">
+        <div class="platform-name">إنستغرام ROD</div>
+        <div class="platform-handle">@rod.kwt</div>
+        <div class="platform-followers rod-color">70,000</div>
+        <div class="platform-followers-label">متابع | 1,318 منشور</div>
+        <div class="score-bar"><div class="score-label"><span>الحجم</span><span>★★☆☆☆</span></div><div class="bar-track"><div class="bar-fill bar-orange" style="width:42%"></div></div></div>
+        <div class="score-bar"><div class="score-label"><span>الترويج للتطبيق</span><span>★★☆☆☆</span></div><div class="bar-track"><div class="bar-fill bar-red" style="width:38%"></div></div></div>
+        <p style="font-size:11px;color:#8ab4d4;margin-top:10px;line-height:1.6">منصة ترويج للتطبيق والبرامج. 70K متابع يبدو ضعيفاً لمنصة ستريمنج طموحة.</p>
+        <div style="margin-top:8px"><span class="tag tag-red">يحتاج نمو</span><span class="tag tag-yellow">تسويق للتطبيق</span></div>
+      </div>
+
+      <div class="platform-card tiktok">
+        <div class="platform-name">TikTok ROD</div>
+        <div class="platform-handle">@rod.kwt</div>
+        <div class="platform-followers rod-color">بيانات محدودة</div>
+        <div class="platform-followers-label">منصة الشباب — ضعيف الحضور</div>
+        <div class="score-bar"><div class="score-label"><span>الحضور</span><span>★★☆☆☆</span></div><div class="bar-track"><div class="bar-fill bar-red" style="width:30%"></div></div></div>
+        <div class="score-bar"><div class="score-label"><span>ترويج البرامج</span><span>★★☆☆☆</span></div><div class="bar-track"><div class="bar-fill bar-red" style="width:28%"></div></div></div>
+        <p style="font-size:11px;color:#8ab4d4;margin-top:10px;line-height:1.6">TikTok هو المكان الأمثل لترويج مقاطع البرامج والمسلسلات. غير مستغل أبداً.</p>
+        <div style="margin-top:8px"><span class="tag tag-red">إعادة بناء</span><span class="priority-badge p-high">🔥 أولوية</span></div>
+      </div>
+
+    </div>
+
+    <div class="note-box" style="margin-top:14px;margin-bottom:0">
+      💡 <strong>فرصة ROD على TikTok:</strong> المنصات الكبرى مثل Netflix وشاهد تضخ مقاطع مسلسلات على TikTok لاستقطاب جمهور الشباب. ROD لم يستغل هذا المنهج رغم أنه يمتلك مكتبة محتوى ضخمة.
+    </div>
+  </div>
+</div>
+
+<!-- ===== APPS ===== -->
+<div class="section" id="sec-apps">
+
+  <!-- تطبيق الراي -->
+  <div class="entity-divider">
+    <div class="entity-badge badge-alrai">🗞️ تطبيق الراي الإخباري</div>
+    <div class="entity-line"></div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:20px">
+    <div class="app-card">
+      <div class="app-icon alrai-icon">🗞️</div>
+      <div class="app-info">
+        <h4>تطبيق الراي</h4>
+        <div class="app-sub">Al Rai — News | iOS & Android</div>
+        <div class="app-meta">
+          <span class="meta-chip">⭐ 4.1 / 5</span>
+          <span class="meta-chip">17 تقييم</span>
+          <span class="meta-chip">17.7 MB</span>
+          <span class="meta-chip">iOS 12+</span>
+          <span class="meta-chip">مجاني</span>
+          <span class="meta-chip green">آخر تحديث يناير 2025</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(79,195,247,0.1)">✅</div>ميزات التطبيق</div>
+      <ul style="list-style:none;font-size:12px;color:#c0cce0;line-height:2">
+        <li>📰 أخبار محلية ودولية على مدار الساعة</li>
+        <li>📄 نسخة PDF من الجريدة اليومية</li>
+        <li>📺 بث مباشر لتلفزيون الراي</li>
+        <li>🎥 تقارير مصورة يومية</li>
+        <li>🔔 تنبيهات الأخبار العاجلة</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(0,229,160,0.1)">💬</div>آراء المستخدمين</div>
+      <div style="background:#0a1628;border-radius:10px;padding:12px;margin-bottom:10px;border:1px solid #1e3a5f">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <span style="font-size:12px;font-weight:700;color:#fff">تطبيق سهل وجميل</span>
+          <span class="review-chip">★★★★★ 2024</span>
+        </div>
+        <p style="font-size:11px;color:#8ab4d4">"يوصل المعلومة بسرعة ويغطي الاحداث بمهنية وموضوعية"</p>
+      </div>
+      <div style="background:#0a1628;border-radius:10px;padding:12px;border:1px solid #1e3a5f">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <span style="font-size:12px;font-weight:700;color:#fff">سلس وأنيق</span>
+          <span class="review-chip">★★★★★ 2024</span>
+        </div>
+        <p style="font-size:11px;color:#8ab4d4">"تغيير جذري عن النسخ السابقة، سلس وسهل التصفح، هوية بصرية أنيقة"</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(244,67,54,0.1)">⚠️</div>نقاط ضعف التطبيق</div>
+      <ul style="list-style:none;font-size:12px;color:#c0cce0;line-height:2.1">
+        <li>🔴 فقط <strong>17 تقييم</strong> — رقم ضعيف جداً يعني ضعف التفاعل مع التطبيق</li>
+        <li>🔴 لا يجمع بيانات المستخدمين — فرصة تخصيص ضائعة</li>
+        <li>🔴 غياب Push Notifications الذكية المخصصة</li>
+        <li>🔴 لا يوجد محتوى بودكاست أو صوتي داخله</li>
+        <li>🔴 ضعف الحضور في App Store Optimization</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- تطبيق ROD -->
+  <div class="entity-divider" style="margin-top:10px">
+    <div class="entity-badge badge-rod">📺 تطبيق ROD — Rai on Demand</div>
+    <div class="entity-line" style="background:linear-gradient(90deg,rgba(0,200,120,0.4),transparent)"></div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:20px">
+    <div class="app-card">
+      <div class="app-icon rod-icon">📺</div>
+      <div class="app-info">
+        <h4>ROD — Rai on Demand</h4>
+        <div class="app-sub">Al Rai TV — Entertainment | Streaming</div>
+        <div class="app-meta">
+          <span class="meta-chip">⭐ 3.9 / 5</span>
+          <span class="meta-chip">11 تقييم</span>
+          <span class="meta-chip">52.1 MB</span>
+          <span class="meta-chip">iOS 16+</span>
+          <span class="meta-chip green">In-App Purchases</span>
+          <span class="meta-chip green">Apple TV (قريباً)</span>
+          <span class="meta-chip green">آخر تحديث فبراير 2025</span>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(0,200,120,0.2)">
+      <div class="card-title"><div class="icon" style="background:rgba(0,200,120,0.1)">✅</div><span class="rod-accent">ميزات ROD</span></div>
+      <ul style="list-style:none;font-size:12px;color:#c0cce0;line-height:2">
+        <li>📺 الامتداد الرقمي لتلفزيون الراي (منذ 2004)</li>
+        <li>🌍 يستهدف جمهوراً عالمياً</li>
+        <li>👨‍👩‍👧 ملفات متعددة للعائلة</li>
+        <li>🎬 محتوى عائلي محافظ على القيم</li>
+        <li>💰 مشتريات داخلية ($3.49 TVOD)</li>
+        <li>📱 يدعم iPhone, iPad, Mac, Apple Vision</li>
+        <li>📺 Apple TV — يحتاج تفعيلاً (طلب مستخدمين)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card" style="border-color:rgba(0,200,120,0.15)">
+      <div class="card-title"><div class="icon" style="background:rgba(255,193,7,0.1)">💬</div>آراء مستخدمي ROD</div>
+      <div style="background:#0a1628;border-radius:10px;padding:12px;margin-bottom:10px;border:1px solid #1e3a5f">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <span style="font-size:12px;font-weight:700;color:#fff">مطلوب Apple TV</span>
+          <span class="review-chip">3 تقييمات متكررة</span>
+        </div>
+        <p style="font-size:11px;color:#8ab4d4">ثلاثة مستخدمين طلبوا دعم Apple TV في أبريل 2025 — إشارة واضحة لشريحة جمهور تلفزيوني مهمة.</p>
+      </div>
+      <div style="background:rgba(244,67,54,0.05);border-radius:10px;padding:12px;border:1px solid rgba(244,67,54,0.2)">
+        <p style="font-size:11px;color:#f44336;font-weight:700">⚠️ تنبيه:</p>
+        <p style="font-size:11px;color:#8ab4d4;margin-top:4px">11 تقييم فقط منذ الإطلاق — يدل على ضعف شديد في الوعي بالتطبيق وتحفيز المستخدمين على التقييم.</p>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(0,200,120,0.15)">
+      <div class="card-title"><div class="icon" style="background:rgba(0,200,120,0.1)">🚀</div><span class="rod-accent">أولويات تطوير ROD</span></div>
+      <ul style="list-style:none;font-size:12px;color:#c0cce0;line-height:2.1">
+        <li>🎯 <strong>إطلاق Apple TV فوراً</strong> — 3 مستخدمين طلبوه!</li>
+        <li>🎯 حملة تقييمات مكثفة (5 → 1000 تقييم)</li>
+        <li>🎯 ROD Premium — اشتراك شهري مخصص</li>
+        <li>🎯 محتوى Original حصري لـ ROD فقط</li>
+        <li>🎯 دعم اللغة العربية الكاملة في التطبيق</li>
+        <li>🎯 تكامل مع حسابات السوشيال</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note-box" style="margin-top:0">
+    📊 <strong>مقارنة التطبيقين:</strong> تطبيق الراي (17.7MB, مجاني, أخبار) vs ROD (52.1MB, مدفوع جزئياً, ترفيه). كلاهما من المطور نفسه "Al Rai" — لكن يخدمان جمهورين مختلفين تماماً وهذا الفصل صحيح استراتيجياً.
+  </div>
+</div>
+
+<!-- ===== WEBSITE ===== -->
+<div class="section" id="sec-website">
+  <div class="sec-title"><div class="dot"></div>الموقع الإلكتروني — alraimedia.com</div>
+
+  <div class="note-box">
+    📊 بيانات الزيارات (SimilarWeb/SEMrush — مارس 2025): الموقع يستقبل <strong>467,780 زيارة شهرياً</strong>، متوسط جلسة <strong>2:37 دقيقة</strong>، نمو <strong>+4.39%</strong> شهر على شهر.
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(33,150,243,0.1)">📊</div>مصادر الترافيك</div>
+      <div class="traffic-row">
+        <div class="traffic-label">بحث عضوي</div>
+        <div class="traffic-bar-wrap"><div class="traffic-bar-inner" style="width:48.5%;background:linear-gradient(90deg,#0d7a55,#00e5a0)">48.5%</div></div>
+        <div class="traffic-val">48.5%</div>
+      </div>
+      <div class="traffic-row">
+        <div class="traffic-label">مباشر</div>
+        <div class="traffic-bar-wrap"><div class="traffic-bar-inner" style="width:40.8%;background:linear-gradient(90deg,#1a6baa,#4fc3f7)">40.8%</div></div>
+        <div class="traffic-val">40.8%</div>
+      </div>
+      <div class="traffic-row">
+        <div class="traffic-label">سوشيال</div>
+        <div class="traffic-bar-wrap"><div class="traffic-bar-inner" style="width:8%;background:linear-gradient(90deg,#b84a00,#ff9800)">8%</div></div>
+        <div class="traffic-val">~8%</div>
+      </div>
+      <div class="traffic-row">
+        <div class="traffic-label">روابط</div>
+        <div class="traffic-bar-wrap"><div class="traffic-bar-inner" style="width:2.7%;background:linear-gradient(90deg,#6a1b9a,#ce93d8)">2.7%</div></div>
+        <div class="traffic-val">~2.7%</div>
+      </div>
+      <p style="font-size:11px;color:#f44336;margin-top:10px">⚠️ السوشيال ترسل أقل من 10% للموقع — رغم مليون متابع على X!</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(33,150,243,0.1)">🌍</div>الجغرافيا — مصادر الزوار</div>
+      <div class="traffic-row">
+        <div class="traffic-label">السعودية 🇸🇦</div>
+        <div class="traffic-bar-wrap"><div class="traffic-bar-inner" style="width:33%;background:linear-gradient(90deg,#006400,#00c853)">33.1%</div></div>
+        <div class="traffic-val">155K</div>
+      </div>
+      <div class="traffic-row">
+        <div class="traffic-label">مصر 🇪🇬</div>
+        <div class="traffic-bar-wrap"><div class="traffic-bar-inner" style="width:26.5%;background:linear-gradient(90deg,#880e4f,#e91e63)">26.5%</div></div>
+        <div class="traffic-val">124K</div>
+      </div>
+      <div class="traffic-row">
+        <div class="traffic-label">الكويت 🇰🇼</div>
+        <div class="traffic-bar-wrap"><div class="traffic-bar-inner" style="width:20%;background:linear-gradient(90deg,#1a237e,#3f51b5)">20%</div></div>
+        <div class="traffic-val">94K</div>
+      </div>
+      <div class="traffic-row">
+        <div class="traffic-label">الأردن 🇯🇴</div>
+        <div class="traffic-bar-wrap"><div class="traffic-bar-inner" style="width:3.7%;background:linear-gradient(90deg,#bf360c,#ff5722)">3.7%</div></div>
+        <div class="traffic-val">17K</div>
+      </div>
+      <p style="font-size:11px;color:#4fc3f7;margin-top:10px">💡 السعودية ومصر أكبر من الكويت — فرصة لمحتوى خليجي أوسع</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(0,229,160,0.1)">✅</div>نقاط قوة الموقع</div>
+      <ul style="list-style:none;font-size:12px;color:#c0cce0;line-height:2">
+        <li>✔ تحديث سريع ومتواصل للأخبار</li>
+        <li>✔ قسم تلفزيون الراي متكامل</li>
+        <li>✔ RSS Feed للمشتركين</li>
+        <li>✔ نسخة PDF عبر واتساب</li>
+        <li>✔ أقسام واضحة ومنظمة</li>
+        <li>✔ نمو شهري مستمر +4.39%</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(244,67,54,0.1)">❌</div>مشاكل الموقع</div>
+      <ul style="list-style:none;font-size:12px;color:#c0cce0;line-height:2">
+        <li>✘ جلسة 2:37 فقط — معدل ارتداد مرتفع</li>
+        <li>✘ السوشيال ترسل أقل من 10% فقط</li>
+        <li>✘ غياب Newsletter إيميل</li>
+        <li>✘ لا يوجد بودكاست أو صوتيات</li>
+        <li>✘ ضعف Push Notifications</li>
+        <li>✘ لا محتوى تفاعلي أو مجتمعي</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTENT ===== -->
+<div class="section" id="sec-content">
+  <div class="sec-title"><div class="dot"></div>تحليل المحتوى والتسويق</div>
+
+  <div class="entity-divider">
+    <div class="entity-badge badge-alrai">🗞️ محتوى الراي</div>
+    <div class="entity-line"></div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(79,195,247,0.1)">📰</div>أنواع المحتوى الحالية</div>
+      <ul style="list-style:none;font-size:11px;color:#c0cce0;line-height:2.1">
+        <li>📍 كروت إخبارية — <span class="tag tag-blue">الأغلب</span></li>
+        <li>📍 أخبار عاجلة نصية — <span class="tag tag-blue">كثير</span></li>
+        <li>📍 مقاطع تلفزيونية — <span class="tag tag-yellow">متوسط</span></li>
+        <li>📍 إنفوغرافيك — <span class="tag tag-red">نادر</span></li>
+        <li>📍 Reels أصيلة — <span class="tag tag-red">ضعيف</span></li>
+        <li>📍 محتوى تفاعلي — <span class="tag tag-red">غائب</span></li>
+        <li>📍 بودكاست — <span class="tag tag-red">غائب</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(255,193,7,0.1)">⚡</div>مشكلة التشبع</div>
+      <p style="font-size:11px;color:#c0cce0;line-height:1.8;margin-bottom:10px">كثرة المنشورات البسيطة تُغرق الخوارزميات وتُقلل الـ Reach.</p>
+      <p style="font-size:12px;font-weight:700;color:#4fc3f7;margin-bottom:6px">التوصية:</p>
+      <ul style="list-style:none;font-size:11px;color:#c0cce0;line-height:2">
+        <li>• عاجل: بلا حدود ✅</li>
+        <li>• تفسيري / تحليلي: 2-3/يوم</li>
+        <li>• Reels وفيديو: واحد/يوم</li>
+        <li>• تفاعلي (Polls): 3/أسبوع</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(0,229,160,0.1)">🏆</div>أقوى / أضعف الأقسام</div>
+      <ul style="list-style:none;font-size:11px;color:#c0cce0;line-height:2.1">
+        <li>📌 المحليات والسياسة <span class="tag tag-green">الأقوى</span></li>
+        <li>📌 الرياضة <span class="tag tag-green">قوي</span></li>
+        <li>📌 الاقتصاد <span class="tag tag-yellow">جيد</span></li>
+        <li>📌 التقنية والمستقبل <span class="tag tag-red">ضعيف</span></li>
+        <li>📌 Fact Check <span class="tag tag-red">غائب</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="entity-divider">
+    <div class="entity-badge badge-rod">📺 محتوى ROD</div>
+    <div class="entity-line" style="background:linear-gradient(90deg,rgba(0,200,120,0.4),transparent)"></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card" style="border-color:rgba(0,200,120,0.15)">
+      <div class="card-title"><div class="icon" style="background:rgba(0,200,120,0.1)">🎬</div><span class="rod-accent">نوع محتوى ROD</span></div>
+      <ul style="list-style:none;font-size:12px;color:#c0cce0;line-height:2">
+        <li>📺 بث مباشر لتلفزيون الراي</li>
+        <li>🎭 مسلسلات وبرامج مؤرشفة (20 سنة)</li>
+        <li>👨‍👩‍👧 محتوى عائلي بقيم راسخة</li>
+        <li>💰 نظام TVOD (دفع لكل مشاهدة - $3.49)</li>
+        <li>👤 ملفات متعددة للعائلة</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:rgba(0,200,120,0.15)">
+      <div class="card-title"><div class="icon" style="background:rgba(244,67,54,0.1)">❌</div>ما يفتقره ROD</div>
+      <ul style="list-style:none;font-size:12px;color:#c0cce0;line-height:2">
+        <li>✘ محتوى Original حصري لـ ROD فقط</li>
+        <li>✘ نظام اشتراك شهري واضح (SVOD)</li>
+        <li>✘ Apple TV — طلبه المستخدمون بشكل متكرر</li>
+        <li>✘ الترويج على TikTok لمقاطع البرامج</li>
+        <li>✘ نظام توصيات ذكية</li>
+        <li>✘ ضعف التسويق بشكل عام</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-title" style="margin-top:8px"><div class="dot"></div>مشاكل التسويق المشتركة</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(244,67,54,0.1)">📣</div>المشكلة الجوهرية</div>
+      <p style="font-size:12px;font-weight:700;color:#f44336;margin-bottom:10px">كلا الكيانين يعتمدان على النمو العضوي فقط</p>
+      <ul style="list-style:none;font-size:12px;color:#c0cce0;line-height:2">
+        <li>🔴 لا Paid Promotion واضح</li>
+        <li>🔴 ضعف Cross-promotion بين الراي و ROD</li>
+        <li>🔴 غياب التعاون مع المؤثرين الكويتيين</li>
+        <li>🔴 لا حملات Hashtag منظمة</li>
+        <li>🔴 لا Email Newsletter</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(0,229,160,0.1)">🚀</div>ما يمكن تفعيله فوراً</div>
+      <ul style="list-style:none;font-size:12px;color:#c0cce0;line-height:2">
+        <li>✅ Instagram Reels مدفوعة للراي</li>
+        <li>✅ TikTok مقاطع برامج لـ ROD</li>
+        <li>✅ Cross-promotion: الراي يروّج ROD والعكس</li>
+        <li>✅ شراكات مع مؤثرين كويتيين</li>
+        <li>✅ Email Newsletter أسبوعي للراي</li>
+        <li>✅ حملة تقييمات للتطبيقين</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== COMPARE ===== -->
+<div class="section" id="sec-compare">
+  <div class="sec-title"><div class="dot"></div>المقارنة مع المنافسين المحليين</div>
+
+  <div class="card" style="margin-bottom:20px;overflow-x:auto">
+    <div class="card-title"><div class="icon" style="background:rgba(79,195,247,0.1)">📊</div>جدول المقارنة الشامل</div>
+    <table class="compare-table" style="min-width:580px">
+      <thead>
+        <tr>
+          <th>المنصة / المؤشر</th>
+          <th>الراي ⭐</th>
+          <th>القبس</th>
+          <th>الوطن</th>
+          <th>الأنباء</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hl">
+          <td><strong>X (تويتر)</strong></td>
+          <td><strong style="color:#4fc3f7">1M+ ✅ رقم 1</strong></td>
+          <td>~800K</td>
+          <td>~400K</td>
+          <td>~300K</td>
+        </tr>
+        <tr>
+          <td><strong>إنستغرام</strong></td>
+          <td style="color:#ffc107">459K ⚠️</td>
+          <td><strong style="color:#f44336">1M+ 🏆</strong></td>
+          <td>~250K</td>
+          <td>~200K</td>
+        </tr>
+        <tr class="hl">
+          <td><strong>زيارات الموقع / شهر</strong></td>
+          <td style="color:#ffc107">468K ⚠️</td>
+          <td><strong style="color:#f44336">~1.2M 🏆</strong></td>
+          <td>~300K</td>
+          <td>~250K</td>
+        </tr>
+        <tr>
+          <td><strong>Threads</strong></td>
+          <td><strong style="color:#4fc3f7">71.5K ✅ رقم 1</strong></td>
+          <td>~50K</td>
+          <td>~20K</td>
+          <td>~15K</td>
+        </tr>
+        <tr class="hl">
+          <td><strong>تطبيق إخباري</strong></td>
+          <td><strong style="color:#4fc3f7">✅ تطبيق الراي 4.1⭐</strong></td>
+          <td>✅ تطبيق القبس</td>
+          <td>✅</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td><strong>منصة ستريمنج</strong></td>
+          <td><strong style="color:#00e5a0">✅ ROD 3.9⭐</strong></td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+        </tr>
+        <tr class="hl">
+          <td><strong>TikTok</strong></td>
+          <td style="color:#f44336">ضعيف ❌</td>
+          <td style="color:#f44336">ضعيف</td>
+          <td style="color:#f44336">ضعيف</td>
+          <td style="color:#f44336">ضعيف</td>
+        </tr>
+        <tr>
+          <td><strong>يوتيوب</strong></td>
+          <td style="color:#ffc107">متوسط</td>
+          <td style="color:#ffc107">متوسط</td>
+          <td style="color:#f44336">ضعيف</td>
+          <td style="color:#f44336">ضعيف</td>
+        </tr>
+        <tr class="hl">
+          <td><strong>بودكاست</strong></td>
+          <td style="color:#f44336">❌ غائب</td>
+          <td style="color:#f44336">❌ غائب</td>
+          <td style="color:#f44336">❌</td>
+          <td style="color:#f44336">❌</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(0,229,160,0.1)">🏆</div>الراي يتفوق في...</div>
+      <ul style="list-style:none;font-size:12px;color:#c0cce0;line-height:2.1">
+        <li>✅ X — رقم 1 إخبارياً كويتياً (1M)</li>
+        <li>✅ Threads — متقدم على الجميع</li>
+        <li>✅ ROD — <strong>وحده في سوق الستريمنج الكويتي</strong></li>
+        <li>✅ تنوع مؤسسي: جريدة + تلفزيون + ROD</li>
+        <li>✅ انتشار إقليمي (السعودية ومصر)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon" style="background:rgba(244,67,54,0.1)">⚠️</div>الراي يتأخر في...</div>
+      <ul style="list-style:none;font-size:12px;color:#c0cce0;line-height:2.1">
+        <li>❌ إنستغرام — القبس يتجاوزه بأكثر من الضعف</li>
+        <li>❌ زيارات الموقع — القبس يتجاوزه 3 أضعاف</li>
+        <li>❌ تقييمات التطبيقين — 17 و11 تقييم فقط!</li>
+        <li>❌ TikTok — كلهم ضعاف لكن لا رائد بعد</li>
+        <li>❌ البودكاست — سوق فارغ تماماً</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SWOT ===== -->
+<div class="section" id="sec-swot">
+  <div class="sec-title"><div class="dot"></div>تحليل SWOT الاستراتيجي الشامل</div>
+  <div class="swot-grid">
+    <div class="swot-card swot-s">
+      <div class="swot-title">💪 القوة</div>
+      <ul class="swot-list">
+        <li>رقم 1 على X في الكويت (مليون متابع)</li>
+        <li>تاريخ وموثوقية منذ 1961 (الرأي العام)</li>
+        <li>شركة مدرجة في بورصة الكويت</li>
+        <li>ROD — وحيد في سوق الستريمنج الكويتي</li>
+        <li>كيانان منفصلان بهوية واضحة (الراي + ROD)</li>
+        <li>انتشار إقليمي واسع (السعودية ومصر)</li>
+        <li>تطبيقان: إخباري + ترفيهي</li>
+        <li>مكتبة محتوى 20 سنة في ROD</li>
+      </ul>
+    </div>
+    <div class="swot-card swot-w">
+      <div class="swot-title">⚠️ الضعف</div>
+      <ul class="swot-list">
+        <li>تقييمات تطبيق الراي: 17 فقط — ضعف الانخراط</li>
+        <li>تقييمات ROD: 11 فقط — وعي منخفض</li>
+        <li>إنستغرام أقل من القبس بأكثر من الضعف</li>
+        <li>TikTok غير مستغل للكيانين معاً</li>
+        <li>ROD لا يدعم Apple TV رغم طلب المستخدمين</li>
+        <li>ضعف Cross-promotion بين الراي و ROD</li>
+        <li>جلسة موقع منخفضة (2:37)</li>
+        <li>غياب Email Newsletter والبودكاست</li>
+      </ul>
+    </div>
+    <div class="swot-card swot-o">
+      <div class="swot-title">🚀 الفرص</div>
+      <ul class="swot-list">
+        <li>ROD Premium — اشتراك شهري محتمل ناجح</li>
+        <li>Apple TV لـ ROD — طلب موجود ومعبّر عنه</li>
+        <li>TikTok الكويت — إخباري وترفيهي كلاهما فارغ</li>
+        <li>البودكاست — لا صحيفة كويتية دخلته بجدية</li>
+        <li>جمهور السعودية الضخم (33% من الترافيك)</li>
+        <li>YouTube Shorts الإخبارية</li>
+        <li>ROD × مؤثرين كويتيين لترويج المحتوى</li>
+        <li>AI في إنتاج المحتوى وتخصيصه</li>
+      </ul>
+    </div>
+    <div class="swot-card swot-t">
+      <div class="swot-title">🔴 التهديدات</div>
+      <ul class="swot-list">
+        <li>القبس يتوسع رقمياً بسرعة</li>
+        <li>منصات الستريمنج الكبرى (شاهد، OSN+) في الكويت</li>
+        <li>الجيل الشاب يفضل TikTok على الصحف</li>
+        <li>تراجع الإعلانات التقليدية للصحف</li>
+        <li>خوارزميات السوشيال تتغير بسرعة</li>
+        <li>صعوبة الحفاظ على المشتركين في ROD</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== IDEAS ===== -->
+<div class="section" id="sec-ideas">
+  <div class="sec-title"><div class="dot"></div>أفكار جديدة لزيادة التفاعل والنمو</div>
+
+  <div class="entity-divider">
+    <div class="entity-badge badge-alrai">🗞️ أفكار لمنصات الراي</div>
+    <div class="entity-line"></div>
+  </div>
+
+  <div class="idea-card">
+    <div class="idea-num">1</div>
+    <div class="idea-content">
+      <h4>سلسلة "الراي يشرح" — TikTok & Reels يومية</h4>
+      <p>مقاطع 30-60 ثانية بأسلوب بسيط لشرح الأخبار المعقدة. مقدم شاب، لهجة كويتية، جرافيك متحرك. القاعدة: "الخبر الواحد بـ 60 ثانية."</p>
+      <div class="idea-impact"><span class="tag tag-green">TikTok</span><span class="tag tag-green">Reels</span><span class="tag tag-blue">جيل Z</span><span class="priority-badge p-high">🔥 أولوية عالية</span></div>
+    </div>
+  </div>
+
+  <div class="idea-card">
+    <div class="idea-num">2</div>
+    <div class="idea-content">
+      <h4>بودكاست "الراي اليومي" — 10 دقائق كل صباح</h4>
+      <p>ملخص صوتي لأخبار الكويت اليومية. يُنشر على Spotify + Apple Podcasts + داخل تطبيق الراي. لا منافس كويتي في هذا المجال حتى الآن.</p>
+      <div class="idea-impact"><span class="tag tag-green">بودكاست</span><span class="tag tag-blue">تطبيق الراي</span><span class="tag tag-green">فرصة فريدة</span><span class="priority-badge p-high">🔥 أولوية عالية</span></div>
+    </div>
+  </div>
+
+  <div class="idea-card">
+    <div class="idea-num">3</div>
+    <div class="idea-content">
+      <h4>قسم "Fact Check الراي"</h4>
+      <p>قسم يومي للتحقق من الأخبار المتداولة على السوشيال. "صحيح أم خطأ؟" — يرسّخ مكانة الراي كمرجع موثوق ويجذب شريحة شبابية جديدة.</p>
+      <div class="idea-impact"><span class="tag tag-blue">مصداقية</span><span class="tag tag-green">تميّز</span><span class="priority-badge p-med">⚡ متوسطة</span></div>
+    </div>
+  </div>
+
+  <div class="idea-card">
+    <div class="idea-num">4</div>
+    <div class="idea-content">
+      <h4>Newsletter أسبوعي "ملخص الراي"</h4>
+      <p>إيميل أسبوعي مصمَّم باحترافية: أبرز 5 قصص + تحليل + رابط بودكاست. يبني قاعدة جمهور مباشرة بعيداً عن خوارزميات السوشيال.</p>
+      <div class="idea-impact"><span class="tag tag-blue">Email</span><span class="tag tag-green">جمهور مباشر</span><span class="priority-badge p-high">🔥 أولوية عالية</span></div>
+    </div>
+  </div>
+
+  <div class="entity-divider" style="margin-top:8px">
+    <div class="entity-badge badge-rod">📺 أفكار لـ ROD</div>
+    <div class="entity-line" style="background:linear-gradient(90deg,rgba(0,200,120,0.4),transparent)"></div>
+  </div>
+
+  <div class="idea-card" style="border-color:rgba(0,200,120,0.2)">
+    <div class="idea-num" style="border-color:#00c878;color:#00e5a0">5</div>
+    <div class="idea-content">
+      <h4>ROD على Apple TV — فوري جداً</h4>
+      <p>ثلاثة مستخدمين طلبوه صراحةً في مراجعات 2025. Apple TV يعني الجلوس العائلي أمام الشاشة الكبيرة — وهذا بالضبط جمهور ROD. التطبيق يدعم tvOS 17 تقنياً، ما ينقصه فقط الإطلاق الرسمي.</p>
+      <div class="idea-impact"><span class="tag tag-green">Apple TV</span><span class="tag tag-green">جمهور عائلي</span><span class="priority-badge p-high">🔥 الأولوية الأولى لـ ROD</span></div>
+    </div>
+  </div>
+
+  <div class="idea-card" style="border-color:rgba(0,200,120,0.2)">
+    <div class="idea-num" style="border-color:#00c878;color:#00e5a0">6</div>
+    <div class="idea-content">
+      <h4>ROD TikTok — مقاطع البرامج والمسلسلات</h4>
+      <p>Netflix وشاهد تنشران يومياً مقاطع 30-60 ثانية على TikTok من برامجها. ROD يملك مكتبة 20 سنة + برامج جديدة — مورد ضخم غير مستغل أبداً على TikTok لجذب المشتركين.</p>
+      <div class="idea-impact"><span class="tag tag-green">TikTok</span><span class="tag tag-blue">مشتركين جدد</span><span class="priority-badge p-high">🔥 أولوية عالية</span></div>
+    </div>
+  </div>
+
+  <div class="idea-card" style="border-color:rgba(0,200,120,0.2)">
+    <div class="idea-num" style="border-color:#00c878;color:#00e5a0">7</div>
+    <div class="idea-content">
+      <h4>ROD Premium — اشتراك شهري + محتوى حصري</h4>
+      <p>تحويل النموذج من TVOD (دفع لكل مقطع) إلى SVOD (اشتراك شهري ثابت) يشمل: برامج قبل عرضها، محتوى Original حصري، أرشيف كامل، بودكاست الراي.</p>
+      <div class="idea-impact"><span class="tag tag-green">دخل متكرر</span><span class="tag tag-blue">محتوى حصري</span><span class="priority-badge p-med">⚡ متوسط المدى</span></div>
+    </div>
+  </div>
+
+  <div class="idea-card" style="border-color:rgba(0,200,120,0.2)">
+    <div class="idea-num" style="border-color:#00c878;color:#00e5a0">8</div>
+    <div class="idea-content">
+      <h4>Cross-Promotion قوي: الراي ↔ ROD</h4>
+      <p>كل منشور إخباري في الراي يحمل CTA لـ ROD. كل برنامج في ROD يُذكر في الراي. مليون متابع على X + 459K على إنستغرام يمكنهم أن يضاعفوا مشتركي ROD.</p>
+      <div class="idea-impact"><span class="tag tag-blue">Cross-promotion</span><span class="tag tag-green">مجاني وفعّال</span><span class="priority-badge p-high">🔥 أولوية عالية</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ROADMAP ===== -->
+<div class="section" id="sec-roadmap">
+  <div class="sec-title"><div class="dot"></div>خارطة الطريق والتوصيات</div>
+
+  <div class="grid-3">
+    <div class="card" style="border-color:rgba(244,67,54,0.3)">
+      <div class="card-title" style="color:#f44336"><div class="icon" style="background:rgba(244,67,54,0.1)">⚡</div>الشهر الأول — فوري</div>
+      <p style="font-size:10px;color:#f44336;margin-bottom:10px;font-weight:700">◉ الراي</p>
+      <ul style="list-style:none;font-size:11px;color:#c0cce0;line-height:2">
+        <li>🔴 إطلاق TikTok إخباري يومي</li>
+        <li>🔴 Instagram Reels يومية</li>
+        <li>🔴 Email Newsletter أسبوعي</li>
+        <li>🔴 حملة تقييمات تطبيق الراي</li>
+      </ul>
+      <p style="font-size:10px;color:#00e5a0;margin:10px 0 8px;font-weight:700">◉ ROD</p>
+      <ul style="list-style:none;font-size:11px;color:#c0cce0;line-height:2">
+        <li>🟢 إطلاق ROD على Apple TV</li>
+        <li>🟢 TikTok مقاطع برامج يومية</li>
+        <li>🟢 حملة تقييمات ROD</li>
+        <li>🟢 Cross-promotion مع الراي</li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-color:rgba(255,193,7,0.3)">
+      <div class="card-title" style="color:#ffc107"><div class="icon" style="background:rgba(255,193,7,0.1)">📅</div>1-3 أشهر</div>
+      <p style="font-size:10px;color:#f44336;margin-bottom:10px;font-weight:700">◉ الراي</p>
+      <ul style="list-style:none;font-size:11px;color:#c0cce0;line-height:2">
+        <li>🔴 إطلاق بودكاست "الراي اليومي"</li>
+        <li>🔴 قسم Fact Check رسمي</li>
+        <li>🔴 شراكات 10 مؤثرين كويتيين</li>
+        <li>🔴 X Spaces أسبوعية</li>
+      </ul>
+      <p style="font-size:10px;color:#00e5a0;margin:10px 0 8px;font-weight:700">◉ ROD</p>
+      <ul style="list-style:none;font-size:11px;color:#c0cce0;line-height:2">
+        <li>🟢 ROD Premium - نموذج SVOD</li>
+        <li>🟢 شراكات مؤثرين لبرامج محددة</li>
+        <li>🟢 دعم عربي كامل في التطبيق</li>
+      </ul>
+    </div>
+
+    <div class="card" style="border-color:rgba(0,229,160,0.3)">
+      <div class="card-title" style="color:#00e5a0"><div class="icon" style="background:rgba(0,229,160,0.1)">🎯</div>3-12 شهر</div>
+      <p style="font-size:10px;color:#f44336;margin-bottom:10px;font-weight:700">◉ الراي</p>
+      <ul style="list-style:none;font-size:11px;color:#c0cce0;line-height:2">
+        <li>🔴 AI في إنتاج المحتوى</li>
+        <li>🔴 خريطة أخبار تفاعلية</li>
+        <li>🔴 جوائز الراي السنوية</li>
+        <li>🔴 توسع المحتوى الخليجي</li>
+      </ul>
+      <p style="font-size:10px;color:#00e5a0;margin:10px 0 8px;font-weight:700">◉ ROD</p>
+      <ul style="list-style:none;font-size:11px;color:#c0cce0;line-height:2">
+        <li>🟢 محتوى Original حصري</li>
+        <li>🟢 ROD على Android TV / Smart TV</li>
+        <li>🟢 برامج تفاعلية حصرية</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,#0d1b35,#0a2444);border-color:#1a6baa">
+    <div class="card-title"><div class="icon" style="background:rgba(79,195,247,0.15)">🏆</div>الخلاصة الاستراتيجية</div>
+    <div class="grid-2" style="margin-top:0">
+      <div>
+        <p style="font-size:12px;font-weight:700;color:#4fc3f7;margin-bottom:8px">نقطة القوة الفريدة للمجموعة:</p>
+        <p style="font-size:12px;color:#8ab4d4;line-height:1.8">الراي هو <strong style="color:#fff">الوحيد</strong> في الكويت الذي يمتلك ذراعاً إخبارياً (جريدة + تلفزيون) مع ذراع ستريمنج (ROD) في نفس المجموعة. هذا التكامل هو الميزة التنافسية الأكبر — لكنه غير مستغل كما يجب.</p>
+      </div>
+      <div>
+        <p style="font-size:12px;font-weight:700;color:#00e5a0;margin-bottom:8px">الرهان الأكبر:</p>
+        <p style="font-size:12px;color:#8ab4d4;line-height:1.8">TikTok + البودكاست + Apple TV لـ ROD = <strong style="color:#fff">معركة الجيل القادم</strong>. لا منافس كويتي فتح هذه الميادين بجدية بعد. <strong style="color:#f44336">من يتحرك أولاً يكسب.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('sec-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
